@@ -7,7 +7,7 @@ import java.sql.Statement;
 public class Ejercicios {
 
     public static void ejercicio1(Connection connection, Statement statement) throws SQLException {
-        // Obtener todos los clientes de la clinica y mostrar sus datos por pantalla
+        // 1. btener todos los clientes de la clinica y mostrar sus datos por pantalla
     }
 
     public static void ejercicio2(Connection connection, Statement statement) throws SQLException {
