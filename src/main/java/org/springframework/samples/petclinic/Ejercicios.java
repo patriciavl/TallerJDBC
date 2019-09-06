@@ -50,7 +50,7 @@ public class Ejercicios {
 
 		statement = connection.createStatement();
 		String sql = "INSERT INTO owners(id, first_name, last_name, address, city, telephone) VALUES (null, 'Patricia', 'Vila Luz', 'Lisboa', 'Lisboa', '12345')";
-		int a = statement.executeUpdate(sql);
+		statement.executeUpdate(sql);
 	}
 
 	public static void ejercicio3(Connection connection, Statement statement) throws SQLException {
@@ -108,37 +108,50 @@ public class Ejercicios {
 
 	public static void reto(Connection connection, Statement statement) throws SQLException {
 		Owner patricia = new Owner();
-		Pet elephant = new Pet();
-		Date data = new Date();
-		
+
 		patricia.setId(null);
 		patricia.setLastName("manel");
 		patricia.setFirstName("manel");
 		patricia.setAddress("debaixo da ponte");
 		patricia.setCity("china");
 		patricia.setTelephone("12345");
-		
+
 		String sql = "INSERT INTO owners VALUES (null, ?, ?, ?, ?, ?)";
 		PreparedStatement preparedStatement = null;
 		preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.setString(1, patricia.getFirstName());
-		preparedStatement.setString(2, patricia.getFirstName());
+		preparedStatement.setString(2, patricia.getLastName());
 		preparedStatement.setString(3, patricia.getAddress());
 		preparedStatement.setString(4, patricia.getCity());
 		preparedStatement.setString(4, patricia.getTelephone());
 		preparedStatement.executeUpdate();
-		
+
+		statement = connection.createStatement();
+		String sqql = "SELECT id FROM owners WHERE first_name=? AND Last_name=?";
+		preparedStatement = connection.prepareStatement(sqql);
+		preparedStatement.setString(1, patricia.getFirstName());
+		preparedStatement.setString(2, patricia.getLastName());
+		ResultSet rs= statement.execute(sqql);
+		int OwnerId = 0;
+		while(rs.next()) {
+			OwnerId=rs.getInt("id");
+		}
+
+		Pet elephant = new Pet();
+		Date data = new Date();
+
 		elephant.setId(null);
-		elephant.setName("ze cao");
+		elephant.setName("dumbo");
 		elephant.setBirthDate(data);
 
-		String sql = "INSERT INTO pets VALUES (null, ?, ?, ?, ?)";
-		PreparedStatement preparedStatement = null;
-		preparedStatement = connection.prepareStatement(sql);
+		String sqll = "INSERT INTO pets (name, birth_date, owner_id, type_id) VALUES (null, ?, ?, ?)";
+		preparedStatement = connection.prepareStatement(sqll);
 		preparedStatement.setString(1, elephant.getName());
-		preparedStatement.setString(2, elephant.getBirthDate());
-		
-	
-		String sql = "DELETE FROM owners WHERE id=?";
+		preparedStatement.setString(2, "2012-05-21");
+		preparedStatement.setInt(2, OwnerId);
+		preparedStatement.setInt(3, 7);
+		preparedStatement.executeUpdate();
+
+		// String sql = "DELETE FROM owners WHERE id=?";
 	}
 }
