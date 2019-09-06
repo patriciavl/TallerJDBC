@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -38,6 +40,19 @@ public class Bill extends BaseEntity {
 	@JsonIgnore
 	private Visit visit;
 	
+//	@ManyToOne
+//	@JoinColumn(name = "owner")
+//	private Owner owner;
+//	
+//	
+//	public Owner getOwner() {
+//		return owner;
+//	}
+//
+//	public void setOwner(Owner owner) {
+//		this.owner = owner;
+//	}
+
 	public Bill () { }
 
 	public long getIdNumber() {
@@ -71,6 +86,4 @@ public class Bill extends BaseEntity {
 	public void setVisit(Visit visit) {
 		this.visit = visit;
 	}
-	
-	
 }

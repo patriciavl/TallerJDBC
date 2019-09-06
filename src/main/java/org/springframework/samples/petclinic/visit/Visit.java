@@ -43,6 +43,7 @@ public class Visit extends BaseEntity {
     /**
      * Holds value of property date.
      */
+	
     @Column(name = "visit_date")
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy/MM/dd")

@@ -116,7 +116,7 @@ public class Ejercicios {
 		patricia.setCity("china");
 		patricia.setTelephone("12345");
 
-		String sql = "INSERT INTO owners VALUES (null, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO owners (first_name, last_name, address, city, telephone) VALUES (null, ?, ?, ?, ?, ?)";
 		PreparedStatement preparedStatement = null;
 		preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.setString(1, patricia.getFirstName());
@@ -127,11 +127,11 @@ public class Ejercicios {
 		preparedStatement.executeUpdate();
 
 		statement = connection.createStatement();
-		String sqql = "SELECT id FROM owners WHERE first_name=? AND Last_name=?";
+		String sqql = "SELECT Id FROM owners WHERE first_name=? AND Last_name=?";
 		preparedStatement = connection.prepareStatement(sqql);
 		preparedStatement.setString(1, patricia.getFirstName());
 		preparedStatement.setString(2, patricia.getLastName());
-		ResultSet rs= statement.execute(sqql);
+		ResultSet rs = statement.executeQuery(sqql);
 		int OwnerId = 0;
 		while(rs.next()) {
 			OwnerId=rs.getInt("id");
